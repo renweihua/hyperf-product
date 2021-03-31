@@ -35,7 +35,9 @@
         "hyperf/socketio-server": "^2.0",
         "hyperf/translation": "^2.1",
         "hyperf/validation": "^2.1",
-        "hyperf/websocket-server": "^2.1"
+        "hyperf/websocket-server": "^2.1",
+        "jaeger/querylist": "^4.2",
+        "jaeger/querylist-absolute-url": "^4.0"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",
