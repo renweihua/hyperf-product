@@ -11,6 +11,16 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\RequestMapping;
+
+/**
+ * Class IndexController
+ *
+ * @Controller()
+ *
+ * @package App\Controller
+ */
 class IndexController extends AbstractController
 {
     public function index()

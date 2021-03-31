@@ -7,7 +7,7 @@ use Hyperf\Utils\ApplicationContext;
 
 /**
  * Class Log
- * 
+ *
  * 封装 Log 类
  *
  * @package App
