@@ -6,12 +6,11 @@ namespace App\Controller\Admin;
 
 use App\Controller\AbstractController;
 use App\Event\Admin\AdminLoginEvent;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Hyperf\Di\Annotation\Inject;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Login
@@ -31,7 +30,7 @@ class Login extends AbstractController
     /**
      * @RequestMapping(path="/admin/auth/login", methods="get, post")
      */
-    public function index()
+    public function index(): ResponseInterface
     {
         $admin = [
             'admin_id' => 1,
@@ -42,6 +41,6 @@ class Login extends AbstractController
         // 这里 dispatch(object $event) 会逐个运行监听该事件的监听器
         $this->eventDispatcher->dispatch(new AdminLoginEvent($admin));
 
-        return $admin;
+        return $this->response->json($admin);
     }
 }
