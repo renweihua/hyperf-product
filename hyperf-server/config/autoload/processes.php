@@ -10,6 +10,9 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 return [
+    // 启动定时任务调度器进程
+    Hyperf\Crontab\Process\CrontabDispatcherProcess::class,
+
     /**
      * Redis异步队列
      *
