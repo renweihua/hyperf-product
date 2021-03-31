@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 
@@ -16,7 +14,7 @@ use Hyperf\HttpServer\Annotation\RequestMapping;
  *
  * @package App\Controller
  */
-class Test
+class Test extends AbstractController
 {
     /**
      * 注解路由实现：
@@ -24,11 +22,11 @@ class Test
      *  path="/test"，访问路径：/path
      *
      * methods 来规定请求方式类型
-     * 
+     *
      * @RequestMapping(path="/test", methods="get")
      */
-    public function index(RequestInterface $request, ResponseInterface $response)
+    public function index()
     {
-        return $response->json(['Hello Hyperf!']);
+        return $this->response->json(['data' => 'Hello Hyperf!']);
     }
 }
