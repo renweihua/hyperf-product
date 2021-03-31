@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AbstractController;
 use App\Event\Admin\AdminLoginEvent;
+use App\Request\Admin\LoginRequest;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Hyperf\Di\Annotation\Inject;
@@ -30,8 +31,12 @@ class Login extends AbstractController
     /**
      * @RequestMapping(path="/admin/auth/login", methods="get, post")
      */
-    public function index(): ResponseInterface
+    public function index(LoginRequest $request): ResponseInterface
     {
+        // 获取通过验证的数据...
+        $validated = $request->validated();
+        var_dump($validated);
+
         $admin = [
             'admin_id' => 1,
             'admin_name' => 'cnpscy',
