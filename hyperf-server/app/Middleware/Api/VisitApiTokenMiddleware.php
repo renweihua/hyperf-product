@@ -51,7 +51,7 @@ class VisitApiTokenMiddleware implements MiddlewareInterface
 
         // 获取形参
         $params = $request->getQueryParams();
-        if (!isset($params['app_key'])){
+        if (!isset($params['app_key']) || empty($params['app_key'])){
             throw new Exception('请设置AppKey！');
         }
         // 验证app_key是否匹配

@@ -26,8 +26,10 @@ Router::addGroup('',
         'middleware' => [
             // 跨域中间件
             App\Middleware\CorsMiddleware::class,
-            // API访问中间件
+            // API访问的Token验证中间件
             \App\Middleware\Api\VisitApiTokenMiddleware::class,
+            // API接口规范的中间件
+            \App\Middleware\Api\ApiFormatSpecificationMiddleware::class,
         ],
     ]
 );

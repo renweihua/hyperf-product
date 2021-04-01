@@ -273,26 +273,6 @@ if ( !function_exists('run_exec') ) {
     }
 }
 
-if ( !function_exists('make_signature') ) {
-    /**
-     * 生成签名
-     *
-     * @param  array   $args
-     * @param  string  $key
-     *
-     * @return string
-     */
-    function make_signature(array $args, string $key)
-    {
-        //排序
-        ksort($args);
-        //生成sign
-        $str = urldecode(http_build_query($args)) . '&key=' . $key;
-        $sign = strtoupper(md5($str));
-        return $sign;
-    }
-}
-
 if ( !function_exists('get_difference_hours') ) {
     /**
      * 计算两个时间戳之间相差的小时
@@ -478,9 +458,32 @@ function xml_to_array($xml)
     return $arr;
 }
 
+
+if ( !function_exists('make_signature') ) {
+    /**
+     * 生成签名
+     *
+     * @param  array   $args
+     * @param  string  $key
+     *
+     * @return string
+     */
+    function make_signature(array $args, string $key)
+    {
+        unset($args['sign']);
+        //排序
+        ksort($args);
+        //生成sign
+        $str = urldecode(http_build_query($args)) . '&key=' . $key;
+        $sign = strtoupper(sha1($str));
+        return $sign;
+    }
+}
+
 // 生成签名
 function make_sign($paraMap = [], $partner_key = '')
 {
+    unset($paraMap['sign']);
     $buff = "";
     ksort($paraMap);
     $paraMap['key'] = $partner_key;
@@ -493,8 +496,7 @@ function make_sign($paraMap = [], $partner_key = '')
     if ( strlen($buff) > 0 ) {
         $reqPar = substr($buff, 0, strlen($buff) - 1);
     }
-
-    return strtoupper(md5($reqPar));
+    return strtoupper(sha1($reqPar));
 }
 
 /**
