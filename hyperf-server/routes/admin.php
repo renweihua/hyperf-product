@@ -17,9 +17,14 @@ use App\Model\Rabc\AdminRoute;
 $router = new Router;
 
 // 获取路由配置表
-$list = AdminRoute::query()->get();
-var_dump($list->toArray());
+$list = AdminRoute::query()->get()->toArray();
+// var_dump(list_to_tree($list, 'route_id', 'parent_id'));
 
+return;
+/**
+ * 1.优先分组
+ * 2.再对其内的进行父子及节点关联
+ */
 foreach ($list as $value){
     $value->route_method = strtoupper($value->route_method);
     switch ($value->route_method){
