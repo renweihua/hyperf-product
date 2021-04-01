@@ -35,6 +35,12 @@ class AppValidationExceptionHandler extends ExceptionHandler
 
         $msg = 'error';
 
+        // Error 监听器
+        if ($throwable instanceof \ErrorException){
+            $msg = $throwable->getMessage();
+        }
+
+        // 验证器的错误类
         if ($throwable instanceof ValidationException){
             $msg = $throwable->validator->errors()->first();
         }
@@ -49,6 +55,7 @@ class AppValidationExceptionHandler extends ExceptionHandler
      */
     public function isValid(Throwable $throwable): bool
     {
+        return true;
         //当前的异常是否属于token验证异常
         return $throwable instanceof ValidationException;
     }
