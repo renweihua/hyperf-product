@@ -14,6 +14,7 @@ namespace App\Controller\Api;
 use App\Controller\AbstractController;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class IndexController
@@ -24,14 +25,10 @@ use Hyperf\HttpServer\Annotation\RequestMapping;
  */
 class Index extends AbstractController
 {
-    public function index()
+    public function api(): ResponseInterface
     {
-        $user = $this->request->input('user', 'Hyperf');
-        $method = $this->request->getMethod();
-
-        return [
-            'method' => $method,
-            'message' => "Hello {$user}.",
-        ];
+        return $this->success([
+            'index-api'
+        ]);
     }
 }

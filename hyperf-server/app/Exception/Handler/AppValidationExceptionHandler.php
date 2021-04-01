@@ -40,6 +40,11 @@ class AppValidationExceptionHandler extends ExceptionHandler
             $msg = $throwable->getMessage();
         }
 
+        // 自定义的异常类监听
+        if ($throwable instanceof \App\Exception\Exception){
+            $msg = $throwable->getMessage();
+        }
+
         // 验证器的错误类
         if ($throwable instanceof ValidationException){
             $msg = $throwable->validator->errors()->first();

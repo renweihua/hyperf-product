@@ -16,6 +16,7 @@ use App\Library\Encrypt\Aes;
 use App\Model\App;
 use App\Request\Admin\AppRequest;
 use Hyperf\HttpServer\Annotation\Controller;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class IndexController
@@ -42,9 +43,9 @@ class IndexController extends AbstractController
      *
      * @param  \App\Request\Admin\AppRequest  $appRequest
      *
-     * @return array
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getApiToken(AppRequest $appRequest)
+    public function getApiToken(AppRequest $appRequest): ResponseInterface
     {
         $data = $appRequest->validated();
 

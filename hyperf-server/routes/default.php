@@ -17,3 +17,17 @@ Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@i
 
 // 获取访问API的token
 Router::get('/get_api_token', 'App\Controller\IndexController@getApiToken');
+
+Router::addGroup('',
+    function() {
+        Router::get('/api', 'App\Controller\Api\Index@api');
+    },
+    [
+        'middleware' => [
+            // 跨域中间件
+            App\Middleware\CorsMiddleware::class,
+            // API访问中间件
+            \App\Middleware\Api\VisitApiTokenMiddleware::class,
+        ],
+    ]
+);
