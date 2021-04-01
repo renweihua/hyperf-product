@@ -58,9 +58,9 @@ trait Json
             'status' => $this->status,
             'msg' => $this->msg
         ], $other);
-        // 后台VUE获取的值，后期如何可能改的了的话，就去掉了
-        $data['message'] = $data['msg'];
-        $data['code'] = $data['status'];
+//        // 后台VUE获取的值，后期如何可能改的了的话，就去掉了
+//        $data['message'] = $data['msg'];
+//        $data['code'] = $data['status'];
         return $this->response->json($data);
     }
 }

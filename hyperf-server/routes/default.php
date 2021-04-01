@@ -15,4 +15,5 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@index');
 
-// Router::
+// 获取访问API的token
+Router::get('/get_api_token', 'App\Controller\IndexController@getApiToken');
