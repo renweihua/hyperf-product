@@ -11,10 +11,11 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use App\Constants\CacheKey;
+use App\Library\Encrypt\Aes;
 use App\Model\App;
 use App\Request\Admin\AppRequest;
 use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Annotation\RequestMapping;
 
 /**
  * Class IndexController
@@ -55,7 +56,16 @@ class IndexController extends AbstractController
                 return $this->error('APP权限不足！');
             }else{
                 // 通过 App 的数据返回Token
-                return $this->success($app);
+                $expire_time = time() + CacheKey::KEY_DEFAULT_TIMEOUT;
+                $encryption_data = [
+                    'app_key' => $app->app_key,
+                    'md5_secret' => md5($app->app_secret),
+                    'expire_time' => $expire_time,
+                ];
+                $aes = new Aes;
+                $token = $aes->encrypt($encryption_data);
+
+                return $this->success(compact('token', 'expire_time'));
             }
         }else{
             return $this->error('APP的Key与秘钥不匹配！');
