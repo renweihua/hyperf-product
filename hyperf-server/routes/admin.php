@@ -23,6 +23,7 @@ Router::get('/admins', 'App\Controller\Admin\Admins@index');
 //$list = AdminRoute::query()->get();
 //// var_dump(list_to_tree($list->toArray(), 'route_id', 'parent_id'));
 //
+/// 不建议使用【实现动态路由配置（从数据库读取）】，一旦配置错误，会导致服务断开，就凉凉了
 ///**
 // * 1.优先分组
 // * 2.再对其内的进行父子及节点关联
