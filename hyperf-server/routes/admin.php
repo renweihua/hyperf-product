@@ -15,6 +15,11 @@ use Hyperf\HttpServer\Router\Router;
 use App\Model\Rabc\AdminRoute;
 
 Router::get('/admins', 'App\Controller\Admin\Admins@index');
+Router::addGroup('/admin', function(){
+    Router::addGroup('/auth', function() {
+        Router::addRoute(['GET', 'POST'], '/login', 'App\Controller\Admin\Login@index');
+    });
+});
 
 
 //$router = new Router;

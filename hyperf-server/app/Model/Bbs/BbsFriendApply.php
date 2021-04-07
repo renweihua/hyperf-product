@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Model\Bbs;
 
-use App\Exceptions\Exception;
+use App\Exception\Exception;
 use App\Model\Model;
 use App\Model\User\UserInfo;
 use Hyperf\DbConnection\Db;

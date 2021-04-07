@@ -4,7 +4,7 @@ declare (strict_types = 1);
 
 namespace App\Model\Rabc;
 
-use App\Exceptions\Exception;
+use App\Exception\Exception;
 use App\Model\Model;
 use App\Model\Upload\UploadFile;
 use Hyperf\Database\Model\Events\Creating;
