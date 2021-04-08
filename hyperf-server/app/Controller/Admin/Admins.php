@@ -8,7 +8,7 @@ use App\Model\App;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 
-class Admins
+class Admins extends BaseController
 {
     public function index(App $app)
     {
