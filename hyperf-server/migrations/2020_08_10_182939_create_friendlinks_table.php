@@ -18,7 +18,7 @@ class CreateFriendlinksTable extends Migration
             $table->bigIncrements('link_id')->comment('友情链接表');
             $table->string('link_name', 100)->default('')->comment('外链名称');
             $table->string('link_url', 200)->default('')->comment('外链URL');
-            $table->boolean('link_cover')->unsigned()->default(0)->comment('封面');
+            $table->string('link_cover', 200)->unsigned()->default(0)->comment('封面');
             $table->smallInteger('link_sort')->unsigned()->default(0)->comment('排序【升序】');
             $table->boolean('open_window')->unsigned()->default(0)->comment('是否打开新窗口：1：是；0：否');
             $table->boolean('is_check')->unsigned()->default(0)->comment('是否审核：1：正常；0：禁用');

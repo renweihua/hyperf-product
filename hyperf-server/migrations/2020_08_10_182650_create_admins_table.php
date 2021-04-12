@@ -18,7 +18,7 @@ class CreateAdminsTable extends Migration
             $table->bigIncrements('admin_id')->comment('管理员表');
             $table->string('admin_name', 100)->default('')->comment('管理员');
             $table->string('admin_email', 100)->default('')->comment('邮箱');
-            $table->integer('admin_head')->unsigned()->default(0)->comment('头像');
+            $table->string('admin_head', 200)->unsigned()->default(0)->comment('头像');
             $table->string('password', 60)->default('')->comment('密码');
             $table->boolean('is_check')->unsigned()->default(0)->comment('是否审核：0：审核中；1：正常；2：禁用');
             $table->boolean('is_delete')->unsigned()->default(0)->comment('是否删除：1：删除；0：正常');
