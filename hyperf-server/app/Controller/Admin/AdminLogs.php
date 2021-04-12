@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Model\System\Friendlink;
-use App\Request\Admin\FriendlinkRequest;
+use App\Model\Log\AdminLog;
 
-class FriendLinks extends BaseController
+class AdminLogs extends BaseController
 {
     // 设定模型
-    protected $model = Friendlink::class;
-    // 验证器
-    protected $validator = FriendlinkRequest::class;
+    protected $model = AdminLog::class;
 
     protected function setSearchWhereFilter(&$model, array $params = []) : void
     {
-        if ( isset($params['search']) && !empty($params['search']) ) {
-            $model->where('link_name', 'like', "%{$params['search']}%");
+        if ( isset($params['admin_id']) && !empty($params['admin_id']) ) {
+            $model->where('admin_id', $params['admin_id']);
         }
         if ( isset($params['is_check']) && !empty($params['is_check']) && $params['is_check'] > -1 ) {
             $model->where('is_check', $params['is_check']);

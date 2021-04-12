@@ -4,20 +4,22 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Model\System\Friendlink;
-use App\Request\Admin\FriendlinkRequest;
+use App\Model\Rabc\AdminRole;
+use App\Request\Admin\AdminRoleRequest;
 
-class FriendLinks extends BaseController
+class AdminRoles extends BaseController
 {
     // 设定模型
-    protected $model = Friendlink::class;
+    protected $model = AdminRole::class;
     // 验证器
-    protected $validator = FriendlinkRequest::class;
+    protected $validator = AdminRoleRequest::class;
+
+    protected $withModel   = ['menus'];
 
     protected function setSearchWhereFilter(&$model, array $params = []) : void
     {
         if ( isset($params['search']) && !empty($params['search']) ) {
-            $model->where('link_name', 'like', "%{$params['search']}%");
+            $model->where('role_name', 'like', "%{$params['search']}%");
         }
         if ( isset($params['is_check']) && !empty($params['is_check']) && $params['is_check'] > -1 ) {
             $model->where('is_check', $params['is_check']);

@@ -14,7 +14,7 @@ class BaseController extends AbstractController
 {
     // 设定模型
     protected $model;
-    protected $model_class;
+    protected $modelInstance;
     // 验证器
     protected $validator;
     // 关联模型设定
@@ -29,8 +29,8 @@ class BaseController extends AbstractController
 
     public function __construct()
     {
-        if ( !empty($this->model_class) ) {
-            $this->model = $this->model_class::getInstance();
+        if ( !empty($this->model) ) {
+            $this->modelInstance = $this->model::getInstance();
         }
 
         // 验证器实例化
@@ -51,18 +51,18 @@ class BaseController extends AbstractController
      */
     public function index(RequestInterface $request)
     {
-        $model = $this->model::query();
+        $model = $this->modelInstance::query();
         // 设置where条件
         if ( method_exists($this, 'setSearchWhereFilter') ) {
             $this->setSearchWhereFilter($model, $request->all());
         }
-        $list = $this->model->getPaginate($model, $this->withModel, 10);
+        $list = $this->modelInstance->getPaginate($model, $this->withModel, 10);
         return $this->success($list);
     }
 
     public function detail($id)
     {
-        $detail = $this->model->with($this->detailWithModel)->find($id);
+        $detail = $this->modelInstance->with($this->detailWithModel)->find($id);
         return empty($detail) ? $this->error('获取失败') : $this->success($detail);
     }
 
@@ -86,7 +86,7 @@ class BaseController extends AbstractController
             }
         }
 
-        if ( $this->model->add($params) ) {
+        if ( $this->modelInstance->add($params) ) {
             return $this->success();
         } else {
             return $this->error('新增失败');
@@ -113,7 +113,7 @@ class BaseController extends AbstractController
                 return $this->error($errorMessage);
             }
         }
-        if ( $this->model->edit($params) ) {
+        if ( $this->modelInstance->edit($params) ) {
             return $this->success();
         } else {
             return $this->error('更新失败');
@@ -140,7 +140,7 @@ class BaseController extends AbstractController
                 return $this->error($errorMessage);
             }
         }
-        if ( $this->model->batch_delete($params[$this->model->getKeyName()]) ) {
+        if ( $this->modelInstance->batch_delete($params[$this->modelInstance->getKeyName()]) ) {
             return $this->success();
         } else {
             return $this->error();
@@ -167,10 +167,10 @@ class BaseController extends AbstractController
             }
         }
 
-        if ( $this->model->changeFiledStatus($params) ) {
-            return $this->success([], $this->model->getError());
+        if ( $this->modelInstance->changeFiledStatus($params) ) {
+            return $this->success([], $this->modelInstance->getError());
         } else {
-            return $this->error($this->model->getError());
+            return $this->error($this->modelInstance->getError());
         }
     }
 }

@@ -19,8 +19,7 @@ class FileModel extends Model
 
     public static function addRecord($file_name, $file, $user_id = 0)
     {
-        return self::query()
-                   ->create(['storage' => 'local', 'host_url' => '', 'file_name' => $file_name, 'file_size' => $file->getSize(), 'file_type' => $file->getClientMediaType(), 'extension' => $file->getExtension(), 'user_id' => $user_id]);
+        return self::query()->create(['storage' => 'local', 'host_url' => '', 'file_name' => $file_name, 'file_size' => $file->getSize(), 'file_type' => $file->getClientMediaType(), 'extension' => $file->getExtension(), 'user_id' => $user_id]);
     }
 
     public static function addRecordInfo($file_name, $file_size, $file_type, $extension = 'jpg', $user_id = 0)

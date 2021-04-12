@@ -13,13 +13,13 @@ declare(strict_types = 1);
 
 use Hyperf\HttpServer\Router\Router;
 use App\Model\Rabc\AdminRoute;
-
-Router::get('/admins', 'App\Controller\Admin\Admins@index');
-Router::addGroup('/admin', function(){
-    Router::addGroup('/auth', function() {
-        Router::addRoute(['GET', 'POST'], '/login', 'App\Controller\Admin\Login@index');
-    });
-});
+//
+//Router::get('/admins', 'App\Controller\Admin\Admins@index');
+//Router::addGroup('/admin', function(){
+//    Router::addGroup('/auth', function() {
+//        Router::addRoute(['GET', 'POST'], '/login', 'App\Controller\Admin\Login@index');
+//    });
+//});
 
 
 //$router = new Router;
@@ -56,3 +56,102 @@ Router::addGroup('/admin', function(){
 //            break;
 //    }
 //}
+
+// put不限制必须id，格式影响前端传参限制，不便于书写
+
+Router::addGroup(
+    '/admin',
+    function ()
+    {
+        // 登录
+        Router::post('/logins', [\App\Controller\Admin\Login::class, 'login']);
+
+        Router::addGroup('', function ()
+        {
+            // 登录相关的API
+            Router::addGroup('/auth', function ()
+            {
+                Router::post('/userInfo', [\App\Controller\Admin\Login::class, 'userInfo']);
+                Router::post('/getMenus', [\App\Controller\Admin\Login::class, 'getMenus']);
+                Router::post('/logout', [\App\Controller\Admin\Login::class, 'logout']);
+            });
+
+            // 图片上传
+            Router::post('/upload_file', [\App\Controller\Admin\UploadFiles::class, 'file']);
+            Router::post('/upload_files', [\App\Controller\Admin\UploadFiles::class, 'files']);
+
+            Router::addGroup('', function (){
+                // 管理员
+                Router::get('/admins', [\App\Controller\Admin\Admins::class, 'index']);
+                Router::get('/admins/detail/{id}', [\App\Controller\Admin\Admins::class, 'detail']);
+                Router::post('/admins/create', [\App\Controller\Admin\Admins::class, 'create']);
+                //Router::put('/admins/{id}', [\App\Controller\Admin\Admins::class, 'update']);
+                Router::put('/admins/update', [\App\Controller\Admin\Admins::class, 'update']);
+                Router::delete('/admins/delete', [\App\Controller\Admin\Admins::class, 'delete']);
+                Router::get('/admins/getSelectLists', [\App\Controller\Admin\Admins::class, 'getSelectLists']);
+                Router::put('/admins/changeFiledStatus', [\App\Controller\Admin\Admins::class, 'changeFiledStatus']);
+
+                // 角色
+                Router::get('/admin_roles', [\App\Controller\Admin\AdminRoles::class, 'index']);
+                Router::get('/admin_roles/detail/{id}', [\App\Controller\Admin\AdminRoles::class, 'detail']);
+                Router::post('/admin_roles/create', [\App\Controller\Admin\AdminRoles::class, 'create']);
+                Router::put('/admin_roles/update', [\App\Controller\Admin\AdminRoles::class, 'update']);
+                Router::delete('/admin_roles/delete', [\App\Controller\Admin\AdminRoles::class, 'delete']);
+                Router::get('/admin_roles/getSelectLists', [\App\Controller\Admin\AdminRoles::class, 'getSelectLists']);
+                Router::put('/admin_roles/changeFiledStatus', [\App\Controller\Admin\AdminRoles::class, 'changeFiledStatus']);
+
+                // 菜单
+                Router::get('/admin_menus', [\App\Controller\Admin\AdminMenus::class, 'index']);
+                Router::get('/admin_menus/detail/{id}', [\App\Controller\Admin\AdminMenus::class, 'detail']);
+                Router::post('/admin_menus/create', [\App\Controller\Admin\AdminMenus::class, 'create']);
+                Router::put('/admin_menus/update', [\App\Controller\Admin\AdminMenus::class, 'update']);
+                Router::delete('/admin_menus/delete', [\App\Controller\Admin\AdminMenus::class, 'delete']);
+                Router::get('/admin_menus/getSelectLists', [\App\Controller\Admin\AdminMenus::class, 'getSelectLists']);
+                Router::put('/admin_menus/changeFiledStatus', [\App\Controller\Admin\AdminMenus::class, 'changeFiledStatus']);
+
+                // 管理员日志
+                Router::get('/admin_logs', [\App\Controller\Admin\AdminLogs::class, 'index']);
+                Router::delete('/admin_logs', [\App\Controller\Admin\AdminLogs::class, 'delete']);
+
+                // 管理员登录日志
+                Router::get('/admin_login_logs', [\App\Controller\Admin\AdminLoginLogs::class, 'index']);
+                Router::delete('/admin_login_logs', [\App\Controller\Admin\AdminLoginLogs::class, 'delete']);
+
+                // 友情链接
+                Router::get('/friendlinks', [\App\Controller\Admin\Friendlinks::class, 'index']);
+                Router::get('/friendlinks/detail/{id}', [\App\Controller\Admin\Friendlinks::class, 'detail']);
+                Router::post('/friendlinks/create', [\App\Controller\Admin\Friendlinks::class, 'create']);
+                Router::put('/friendlinks/update', [\App\Controller\Admin\Friendlinks::class, 'update']);
+                Router::delete('/friendlinks/delete', [\App\Controller\Admin\Friendlinks::class, 'delete']);
+                Router::put('/friendlinks/changeFiledStatus', [\App\Controller\Admin\Friendlinks::class, 'changeFiledStatus']);
+
+                // banner
+                Router::get('/banners', [\App\Controller\Admin\Banners::class, 'index']);
+                Router::get('/banners/detail/{id}', [\App\Controller\Admin\Banners::class, 'detail']);
+                Router::post('/banners/create', [\App\Controller\Admin\Banners::class, 'create']);
+                Router::put('/banners/update', [\App\Controller\Admin\Banners::class, 'update']);
+                Router::delete('/banners/delete', [\App\Controller\Admin\Banners::class, 'delete']);
+                Router::put('/banners/changeFiledStatus', [\App\Controller\Admin\Banners::class, 'changeFiledStatus']);
+
+                // 配置管理
+                Router::get('/configs', [\App\Controller\Admin\Configs::class, 'index']);
+                Router::get('/configs/detail/{id}', [\App\Controller\Admin\Configs::class, 'detail']);
+                Router::post('/configs/create', [\App\Controller\Admin\Configs::class, 'create']);
+                Router::put('/configs/update', [\App\Controller\Admin\Configs::class, 'update']);
+                Router::delete('/configs/delete', [\App\Controller\Admin\Configs::class, 'delete']);
+                Router::put('/configs/changeFiledStatus', [\App\Controller\Admin\Configs::class, 'changeFiledStatus']);
+            }, [
+                // 权限验证
+                'middleware' => [\App\Middleware\Admin\RabcMiddleware::class],
+            ]);
+        }, [
+            // JWT认证
+            'middleware' => [\App\Middleware\Admin\JwtAuthMiddleware::class],
+        ]);
+    },
+    [
+        'middleware' => [
+            App\Middleware\CorsMiddleware::class,
+        ]
+    ]
+);

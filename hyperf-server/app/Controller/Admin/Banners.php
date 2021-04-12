@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Model\System\Friendlink;
-use App\Request\Admin\FriendlinkRequest;
+use App\Model\System\Banner;
+use App\Request\Admin\BannerRequest;
 
-class FriendLinks extends BaseController
+class Banners extends BaseController
 {
     // 设定模型
-    protected $model = Friendlink::class;
+    protected $model = Banner::class;
     // 验证器
-    protected $validator = FriendlinkRequest::class;
+    protected $validator = BannerRequest::class;
 
     protected function setSearchWhereFilter(&$model, array $params = []) : void
     {
         if ( isset($params['search']) && !empty($params['search']) ) {
-            $model->where('link_name', 'like', "%{$params['search']}%");
+            $model->where('banner_name', 'like', "%{$params['search']}%");
         }
         if ( isset($params['is_check']) && !empty($params['is_check']) && $params['is_check'] > -1 ) {
             $model->where('is_check', $params['is_check']);
