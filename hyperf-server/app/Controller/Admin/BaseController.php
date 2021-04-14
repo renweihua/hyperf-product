@@ -32,9 +32,6 @@ class BaseController extends AbstractController
         if ( !empty($this->model) ) {
             $this->modelInstance = $this->model::getInstance();
         }
-
-        // 验证器实例化
-        if ( $this->validator ) $this->validator = $this->validator::getInstance();
     }
 
     protected function setSearchWhereFilter(&$model, array $params = []) : void

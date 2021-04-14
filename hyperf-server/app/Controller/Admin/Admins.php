@@ -6,11 +6,18 @@ namespace App\Controller\Admin;
 
 use App\Model\Rabc\Admin;
 use App\Request\Admin\AdminRequest;
+use Hyperf\Di\Annotation\Inject;
 
 class Admins extends BaseController
 {
     protected $model = Admin::class;
-    protected $validator = AdminRequest::class;
+
+    /**
+     * @Inject
+     * @var AdminRequest
+     */
+    protected $validator;
+
     protected $withModel   = ['admin_info'];
     protected $detailWithModel   = ['admin_info', 'roles'];
 
