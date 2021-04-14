@@ -109,8 +109,6 @@ abstract class Model extends BaseModel
         $list = $model->where($where)->with($with_model)->paginate($limit);
         return ['data'          => $list->items(),
                 'current_page'  => $list->currentPage(),
-                'current_total' => $list->count(),
-                'per_page'      => $list->perPage(),
                 'limit'         => $list->perPage(),
                 'total'         => $list->total(),
                 'last_page'     => $list->lastPage(),
@@ -121,9 +119,7 @@ abstract class Model extends BaseModel
     {
         return ['data'          => $list->items(),
                 'current_page'  => $list->currentPage(),
-                'current_total' => $list->count(),
                 'per_page'      => $list->perPage(),
-                'limit'         => $list->perPage(),
                 'total'         => $list->total(),
                 'last_page'     => $list->lastPage(),
         ];

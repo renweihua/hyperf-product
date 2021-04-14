@@ -14,6 +14,8 @@ class Admin extends Model
 {
     protected $primaryKey = 'admin_id';
     public    $timestamps = false;
+    // 设置隐藏属性
+    protected $hidden = ['password', 'login_token'];
 
     public function admin_info()
     {

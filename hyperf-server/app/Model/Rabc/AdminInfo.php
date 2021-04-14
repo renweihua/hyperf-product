@@ -10,13 +10,13 @@ use Hyperf\Database\Model\Events\Creating;
 class AdminInfo extends Model
 {
     protected $primaryKey = 'admin_id';
-    protected $appends    = ['abcd'];
+//    protected $appends    = ['abcd'];
     public    $is_delete  = 1;// 是否删除：0.假删除；1.真删除【默认全部假删除】
 
-    public function getAbcdAttribute($value)
-    {
-        return 'admininfo-abcd';
-    }
+//    public function getAbcdAttribute($value)
+//    {
+//        return 'admininfo-abcd';
+//    }
 
     public function creating(Creating $event)
     {
