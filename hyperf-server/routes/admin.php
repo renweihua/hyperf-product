@@ -77,11 +77,14 @@ Router::addGroup(
                 Router::post('/logout', [Login::class, 'logout']);
             });
 
-            // 图片上传
+            // 文件上传
             Router::post('/upload_file', [\App\Controller\Admin\UploadFiles::class, 'file']);
             Router::post('/upload_files', [\App\Controller\Admin\UploadFiles::class, 'files']);
 
             Router::addGroup('', function (){
+                // 文件管理
+                Router::get('/files', [\App\Controller\Admin\UploadFiles::class, 'index']);
+
                 // 管理员
                 Router::get('/admins', [\App\Controller\Admin\Admins::class, 'index']);
                 Router::get('/admins/detail/{id}', [\App\Controller\Admin\Admins::class, 'detail']);

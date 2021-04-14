@@ -14,7 +14,11 @@ class FileModel extends Model
 
     public function getFilePathAttribute($value)
     {
-        return env('APP_URL') . $this->file_name;
+        if ($this->attributes['storage'] == 'local'){
+            return env('APP_URL') . '/' . $this->attributes['file_name'];
+        }else{
+            return $this->attributes['host_url'] . '/'  . $this->attributes['file_name'];
+        }
     }
 
     public static function addRecord($file_name, $file, $user_id = 0)

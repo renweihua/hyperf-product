@@ -9,6 +9,8 @@ use App\Model\Upload\UploadFile;
 
 class UploadFiles extends BaseController
 {
+    protected $model = UploadFile::class;
+
     /**
      * 单图上传
      *
