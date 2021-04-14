@@ -59,21 +59,22 @@ use App\Model\Rabc\AdminRoute;
 
 // put不限制必须id，格式影响前端传参限制，不便于书写
 
+use App\Controller\Admin\Login;
 Router::addGroup(
     '/admin',
     function ()
     {
         // 登录
-        Router::post('/logins', [\App\Controller\Admin\Login::class, 'login']);
+        Router::post('/auth/login', [Login::class, 'login']);
 
         Router::addGroup('', function ()
         {
             // 登录相关的API
             Router::addGroup('/auth', function ()
             {
-                Router::post('/userInfo', [\App\Controller\Admin\Login::class, 'userInfo']);
-                Router::post('/getMenus', [\App\Controller\Admin\Login::class, 'getMenus']);
-                Router::post('/logout', [\App\Controller\Admin\Login::class, 'logout']);
+                Router::post('/userInfo', [Login::class, 'userInfo']);
+                Router::post('/getMenus', [Login::class, 'getMenus']);
+                Router::post('/logout', [Login::class, 'logout']);
             });
 
             // 图片上传
@@ -118,12 +119,12 @@ Router::addGroup(
                 Router::delete('/admin_login_logs', [\App\Controller\Admin\AdminLoginLogs::class, 'delete']);
 
                 // 友情链接
-                Router::get('/friendlinks', [\App\Controller\Admin\Friendlinks::class, 'index']);
-                Router::get('/friendlinks/detail/{id}', [\App\Controller\Admin\Friendlinks::class, 'detail']);
-                Router::post('/friendlinks/create', [\App\Controller\Admin\Friendlinks::class, 'create']);
-                Router::put('/friendlinks/update', [\App\Controller\Admin\Friendlinks::class, 'update']);
-                Router::delete('/friendlinks/delete', [\App\Controller\Admin\Friendlinks::class, 'delete']);
-                Router::put('/friendlinks/changeFiledStatus', [\App\Controller\Admin\Friendlinks::class, 'changeFiledStatus']);
+                Router::get('/friendlinks', [\App\Controller\Admin\FriendLinks::class, 'index']);
+                Router::get('/friendlinks/detail/{id}', [\App\Controller\Admin\FriendLinks::class, 'detail']);
+                Router::post('/friendlinks/create', [\App\Controller\Admin\FriendLinks::class, 'create']);
+                Router::put('/friendlinks/update', [\App\Controller\Admin\FriendLinks::class, 'update']);
+                Router::delete('/friendlinks/delete', [\App\Controller\Admin\FriendLinks::class, 'delete']);
+                Router::put('/friendlinks/changeFiledStatus', [\App\Controller\Admin\FriendLinks::class, 'changeFiledStatus']);
 
                 // banner
                 Router::get('/banners', [\App\Controller\Admin\Banners::class, 'index']);
@@ -142,16 +143,20 @@ Router::addGroup(
                 Router::put('/configs/changeFiledStatus', [\App\Controller\Admin\Configs::class, 'changeFiledStatus']);
             }, [
                 // 权限验证
-                'middleware' => [\App\Middleware\Admin\RabcMiddleware::class],
+                'middleware' => [
+                    // \App\Middleware\Admin\RabcMiddleware::class
+                ],
             ]);
         }, [
             // JWT认证
-            'middleware' => [\App\Middleware\Admin\JwtAuthMiddleware::class],
+            'middleware' => [
+                // \App\Middleware\Admin\JwtAuthMiddleware::class
+            ],
         ]);
     },
     [
         'middleware' => [
-            App\Middleware\CorsMiddleware::class,
+            // App\Middleware\CorsMiddleware::class,
         ]
     ]
 );
