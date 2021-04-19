@@ -9,6 +9,7 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 use Hyperf\Di\Annotation\Inject;
+use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
 class BaseController extends AbstractController
 {
@@ -46,7 +47,7 @@ class BaseController extends AbstractController
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function index(RequestInterface $request)
+    public function index(RequestInterface $request): PsrResponseInterface
     {
         $model = $this->modelInstance::query();
         // 设置where条件
@@ -57,7 +58,14 @@ class BaseController extends AbstractController
         return $this->success($list);
     }
 
-    public function detail($id)
+    /**
+     * 详情
+     *
+     * @param $id
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function detail($id): PsrResponseInterface
     {
         $detail = $this->modelInstance->with($this->detailWithModel)->find($id);
         return empty($detail) ? $this->error('获取失败') : $this->success($detail);
@@ -70,7 +78,7 @@ class BaseController extends AbstractController
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function create(RequestInterface $request)
+    public function create(RequestInterface $request): PsrResponseInterface
     {
         $params = $request->all();
         // 开启验证器
@@ -98,7 +106,7 @@ class BaseController extends AbstractController
      * @return \Psr\Http\Message\ResponseInterface
      */
     // , $id
-    public function update(RequestInterface $request)
+    public function update(RequestInterface $request): PsrResponseInterface
     {
         $params = $request->all();
         // 开启验证器
@@ -121,11 +129,10 @@ class BaseController extends AbstractController
      * 批量删除
      *
      * @param  \Hyperf\HttpServer\Contract\RequestInterface  $request
-     * @param                                                $id
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function delete(RequestInterface $request)
+    public function delete(RequestInterface $request): PsrResponseInterface
     {
         $params = $request->all();
         // 开启验证器
@@ -151,7 +158,7 @@ class BaseController extends AbstractController
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function changeFiledStatus(RequestInterface $request)
+    public function changeFiledStatus(RequestInterface $request): PsrResponseInterface
     {
         $params = $request->all();
         // 开启验证器
