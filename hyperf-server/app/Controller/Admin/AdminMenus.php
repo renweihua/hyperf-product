@@ -7,13 +7,20 @@ namespace App\Controller\Admin;
 use App\Model\Rabc\AdminMenu;
 use App\Request\Admin\AdminMenuRequest;
 use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\Di\Annotation\Inject;
 
 class AdminMenus extends BaseController
 {
     // 设定模型
     protected $model = AdminMenu::class;
-    // 验证器
-    protected $validator = AdminMenuRequest::class;
+
+    /**
+     * 验证器
+     *
+     * @Inject
+     * @var AdminMenuRequest
+     */
+    protected $validator;
 
     public function index(RequestInterface $request)
     {

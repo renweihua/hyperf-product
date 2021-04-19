@@ -21,11 +21,11 @@ class UploadFiles extends BaseController
      */
     public function file($file_name = 'file', UploadFile $uploadFile)
     {
-        try {
-            // 存在则返回一个 Hyperf\HttpMessage\Upload\UploadedFile 对象，不存在则返回 null
-            $file = $this->request->file($file_name);
-            if (empty($file)) return $this->error('请上传文件');
+        // 存在则返回一个 Hyperf\HttpMessage\Upload\UploadedFile 对象，不存在则返回 null
+        $file = $this->request->file($file_name);
+        if (empty($file)) return $this->error('请上传文件');
 
+        try {
             // 获取文件扩展名
             $name = $uploadFile->getUniqidName($file->getExtension());
             // 图片的绝对路径

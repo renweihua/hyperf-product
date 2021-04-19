@@ -6,13 +6,20 @@ namespace App\Controller\Admin;
 
 use App\Model\System\Friendlink;
 use App\Request\Admin\FriendlinkRequest;
+use Hyperf\Di\Annotation\Inject;
 
 class FriendLinks extends BaseController
 {
     // 设定模型
     protected $model = Friendlink::class;
-    // 验证器
-    protected $validator = FriendlinkRequest::class;
+
+    /**
+     * 验证器
+     *
+     * @Inject
+     * @var FriendlinkRequest
+     */
+    protected $validator;
 
     protected function setSearchWhereFilter(&$model, array $params = []) : void
     {

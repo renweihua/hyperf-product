@@ -13,6 +13,8 @@ class Admins extends BaseController
     protected $model = Admin::class;
 
     /**
+     * 验证器
+     *
      * @Inject
      * @var AdminRequest
      */

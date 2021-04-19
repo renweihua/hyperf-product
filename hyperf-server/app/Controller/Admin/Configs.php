@@ -6,13 +6,20 @@ namespace App\Controller\Admin;
 
 use App\Model\System\Config;
 use App\Request\Admin\ConfigRequest;
+use Hyperf\Di\Annotation\Inject;
 
 class Configs extends BaseController
 {
     // 设定模型
     protected $model = Config::class;
-    // 验证器
-    protected $validator = ConfigRequest::class;
+
+    /**
+     * 验证器
+     *
+     * @Inject
+     * @var ConfigRequest
+     */
+    protected $validator;
 
     protected function setSearchWhereFilter(&$model, array $params = []) : void
     {
