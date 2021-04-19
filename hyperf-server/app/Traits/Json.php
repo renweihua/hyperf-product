@@ -40,6 +40,7 @@ trait Json
     {
         $this->data = $data;
         $this->msg = $msg;
+        $this->status = 1;
         return $this->myAjaxReturn($other);
     }
 

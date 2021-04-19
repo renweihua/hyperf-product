@@ -13,7 +13,7 @@ class BannerRequest extends BaseRequest
         return [
             'banner_id'    => 'required',
             'banner_name' => 'required|max:200',
-            'banner_cover' => 'required|integer',
+            'banner_cover' => 'required',
             'is_check'     => 'required|integer',
         ];
     }
@@ -25,7 +25,7 @@ class BannerRequest extends BaseRequest
             'banner_name.required' => 'Banner标题为必填项！',
             'banner_name.max'      => 'Banner标题最大长度为200字符！',
             'banner_cover.required' => 'Banner封面为必填项！',
-            'is_check.number'       => 'Banner状态为必选项！',
+            'is_check.required'       => '设置是否启用！',
         ];
     }
 
