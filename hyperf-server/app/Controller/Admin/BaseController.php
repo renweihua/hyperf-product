@@ -84,9 +84,9 @@ class BaseController extends AbstractController
         }
 
         if ( $this->modelInstance->add($params) ) {
-            return $this->success();
+            return $this->success([], '新增成功！');
         } else {
-            return $this->error('新增失败');
+            return $this->error('新增失败！');
         }
     }
 
@@ -111,9 +111,9 @@ class BaseController extends AbstractController
             }
         }
         if ( $this->modelInstance->edit($params) ) {
-            return $this->success();
+            return $this->success([], '更新成功！');
         } else {
-            return $this->error('更新失败');
+            return $this->error('更新失败！');
         }
     }
 
@@ -138,9 +138,9 @@ class BaseController extends AbstractController
             }
         }
         if ( $this->modelInstance->batch_delete($params[$this->modelInstance->getKeyName()]) ) {
-            return $this->success();
+            return $this->success([], '删除成功！');
         } else {
-            return $this->error();
+            return $this->error('删除失败！');
         }
     }
 
