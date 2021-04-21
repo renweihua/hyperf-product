@@ -26,7 +26,7 @@ class AdminRequest extends BaseRequest
             'admin_name.required'  => '管理员名称为必填项！',
             'admin_email.required' => '管理员邮箱为必填项！',
             'admin_email.email'    => '管理员邮箱格式非法！',
-            'is_check.number'      => '管理员账户状态为必选项！',
+            'is_check.required'       => '设置是否启用！',
         ];
     }
 

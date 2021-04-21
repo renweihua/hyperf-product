@@ -20,7 +20,10 @@ class AdminRoleRequest extends BaseRequest
     public function messages() : array
     {
         return [
-
+            'role_id.required'    => '角色Id为必填项！',
+            'role_name.required'  => '角色名称为必填项！',
+            'role_name.max'      => '角色名称最大长度为200字符！',
+            'is_check.required'       => '设置是否启用！',
         ];
     }
 
