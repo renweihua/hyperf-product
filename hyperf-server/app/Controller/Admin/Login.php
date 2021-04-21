@@ -24,7 +24,7 @@ class Login extends AbstractController
      */
     private $loginService;
 
-    public function index(LoginRequest $request): ResponseInterface
+    public function login(LoginRequest $request): ResponseInterface
     {
         // 获取通过验证的数据...
         $data = $request->validated();

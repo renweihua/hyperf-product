@@ -153,13 +153,13 @@ Router::addGroup(
         }, [
             // JWT认证
             'middleware' => [
-                // \App\Middleware\Admin\JwtAuthMiddleware::class
+                \App\Middleware\Admin\TokenAuthMiddleware::class
             ],
         ]);
     },
     [
         'middleware' => [
-            // App\Middleware\CorsMiddleware::class,
+             App\Middleware\CorsMiddleware::class,
         ],
     ]
 );
