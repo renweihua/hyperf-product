@@ -13,6 +13,7 @@ declare(strict_types = 1);
 
 use Hyperf\HttpServer\Router\Router;
 use App\Model\Rabc\AdminRoute;
+
 //
 //Router::get('/admins', 'App\Controller\Admin\Admins@index');
 //Router::addGroup('/admin', function(){
@@ -20,7 +21,6 @@ use App\Model\Rabc\AdminRoute;
 //        Router::addRoute(['GET', 'POST'], '/login', 'App\Controller\Admin\Login@index');
 //    });
 //});
-
 
 //$router = new Router;
 
@@ -57,24 +57,19 @@ use App\Model\Rabc\AdminRoute;
 //    }
 //}
 
-
-
-
 // put不限制必须id，格式影响前端传参限制，不便于书写
 
 use App\Controller\Admin\Login;
+
 Router::addGroup(
     '/admin',
-    function ()
-    {
+    function() {
         // 登录
         Router::post('/auth/login', [Login::class, 'login']);
 
-        Router::addGroup('', function ()
-        {
+        Router::addGroup('', function() {
             // 登录相关的API
-            Router::addGroup('/auth', function ()
-            {
+            Router::addGroup('/auth', function() {
                 Router::post('/userInfo', [Login::class, 'userInfo']);
                 Router::post('/getMenus', [Login::class, 'getMenus']);
                 Router::post('/logout', [Login::class, 'logout']);
@@ -84,7 +79,7 @@ Router::addGroup(
             Router::post('/upload_file', [\App\Controller\Admin\UploadFiles::class, 'file']);
             Router::post('/upload_files', [\App\Controller\Admin\UploadFiles::class, 'files']);
 
-            Router::addGroup('', function (){
+            Router::addGroup('', function() {
                 // 文件管理
                 Router::get('/files', [\App\Controller\Admin\UploadFiles::class, 'index']);
 
@@ -118,11 +113,11 @@ Router::addGroup(
 
                 // 管理员日志
                 Router::get('/admin_logs', [\App\Controller\Admin\AdminLogs::class, 'index']);
-                Router::delete('/admin_logs', [\App\Controller\Admin\AdminLogs::class, 'delete']);
+                Router::delete('/admin_logs/delete', [\App\Controller\Admin\AdminLogs::class, 'delete']);
 
                 // 管理员登录日志
                 Router::get('/admin_login_logs', [\App\Controller\Admin\AdminLoginLogs::class, 'index']);
-                Router::delete('/admin_login_logs', [\App\Controller\Admin\AdminLoginLogs::class, 'delete']);
+                Router::delete('/admin_login_logs/delete', [\App\Controller\Admin\AdminLoginLogs::class, 'delete']);
 
                 // 友情链接
                 Router::get('/friendlinks', [\App\Controller\Admin\FriendLinks::class, 'index']);
@@ -164,6 +159,6 @@ Router::addGroup(
     [
         'middleware' => [
             // App\Middleware\CorsMiddleware::class,
-        ]
+        ],
     ]
 );
