@@ -199,7 +199,7 @@ abstract class Model extends BaseModel
     {
         $primary = $this->getKeyName();
         if ( empty($request_data[$primary]) ) {
-            $this->setError('主键为必填项');
+            $this->setError('主键为必填项！');
             return false;
         }
         $alert_prefix = '{ ' . $primary . ' => ' . $request_data[$primary] . ' }';

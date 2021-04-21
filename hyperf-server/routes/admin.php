@@ -145,6 +145,7 @@ Router::addGroup(
                 Router::put('/configs/update', [\App\Controller\Admin\Configs::class, 'update']);
                 Router::delete('/configs/delete', [\App\Controller\Admin\Configs::class, 'delete']);
                 Router::put('/configs/changeFiledStatus', [\App\Controller\Admin\Configs::class, 'changeFiledStatus']);
+                Router::post('/configs/pushRefreshConfig', [\App\Controller\Admin\Configs::class, 'pushRefreshConfig']);
             }, [
                 // 权限验证
                 'middleware' => [

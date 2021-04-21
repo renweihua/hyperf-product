@@ -6,13 +6,20 @@ namespace App\Controller\Admin;
 
 use App\Model\System\Banner;
 use App\Request\Admin\BannerRequest;
+use Hyperf\Di\Annotation\Inject;
 
 class Banners extends BaseController
 {
     // 设定模型
     protected $model = Banner::class;
-    // 验证器
-    protected $validator = BannerRequest::class;
+
+    /**
+     * 验证器
+     *
+     * @Inject
+     * @var BannerRequest
+     */
+    protected $validator;
 
     protected function setSearchWhereFilter(&$model, array $params = []) : void
     {

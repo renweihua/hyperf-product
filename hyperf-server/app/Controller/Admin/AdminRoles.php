@@ -6,13 +6,20 @@ namespace App\Controller\Admin;
 
 use App\Model\Rabc\AdminRole;
 use App\Request\Admin\AdminRoleRequest;
+use Hyperf\Di\Annotation\Inject;
 
 class AdminRoles extends BaseController
 {
     // 设定模型
     protected $model = AdminRole::class;
-    // 验证器
-    protected $validator = AdminRoleRequest::class;
+
+    /**
+     * 验证器
+     *
+     * @Inject
+     * @var AdminRoleRequest
+     */
+    protected $validator;
 
     protected $withModel   = ['menus'];
 
