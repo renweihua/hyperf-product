@@ -82,6 +82,7 @@ Router::addGroup(
             Router::addGroup('', function() {
                 // 文件管理
                 Router::get('/files', [\App\Controller\Admin\UploadFiles::class, 'index']);
+                Router::delete('/files/delete', [\App\Controller\Admin\UploadFiles::class, 'delete']);
 
                 // 管理员
                 Router::get('/admins', [\App\Controller\Admin\Admins::class, 'index']);
