@@ -37,4 +37,13 @@ class Login extends AbstractController
             return $this->error($e->getMessage());
         }
     }
+
+    public function me()
+    {
+        if($res = $this->loginService->me($this->request->getAttribute('admin_id'))){
+            return $this->success($res, $this->loginService->getError());
+        }else{
+            return $this->error($this->loginService->getError());
+        }
+    }
 }

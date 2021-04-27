@@ -54,7 +54,7 @@ class LoginService extends Service
         $token = Rsa::publicEncrypt($data);
 
         return [
-            'token' => $token,
+            'access_token' => $token,
             'expire_time' => $data['expire_time'],
         ];
     }
@@ -62,5 +62,16 @@ class LoginService extends Service
     public function getTokenFormat($admin) : array
     {
         return ['admin_id' => $admin->admin_id, 'guard' => 'admin', 'expire_time' => time() + CacheKey::KEY_DEFAULT_TIMEOUT];
+    }
+
+    public function me($admin_id)
+    {
+        $admin = $this->admin->find($admin_id);
+        return [
+            'avatar'      => "https://i.gtimg.cn/club/item/face/img/2/15922_100.gif",
+            'username'    => $admin->admin_name,
+            'permissions' => ['admin'],
+            'roles'       => ['admin'],
+        ];
     }
 }

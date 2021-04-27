@@ -70,6 +70,7 @@ Router::addGroup(
         Router::addGroup('', function() {
             // 登录相关的API
             Router::addGroup('/auth', function() {
+                Router::post('/me', [Login::class, 'me']);
                 Router::post('/userInfo', [Login::class, 'userInfo']);
                 Router::post('/getMenus', [Login::class, 'getMenus']);
                 Router::post('/logout', [Login::class, 'logout']);
