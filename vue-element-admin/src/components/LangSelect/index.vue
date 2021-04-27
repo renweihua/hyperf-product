@@ -8,10 +8,10 @@
         中文
       </el-dropdown-item>
       <el-dropdown-item :disabled="language==='en'" command="en">
-        English
+        英语|English
       </el-dropdown-item>
       <el-dropdown-item :disabled="language==='es'" command="es">
-        Español
+        西班牙语|Español
       </el-dropdown-item>
       <el-dropdown-item :disabled="language==='ja'" command="ja">
         日本語
@@ -22,20 +22,20 @@
 
 <script>
 export default {
-  computed: {
-    language() {
-      return this.$store.getters.language
+    computed: {
+        language() {
+            return this.$store.getters.language
+        }
+    },
+    methods: {
+        handleSetLanguage(lang) {
+            this.$i18n.locale = lang
+            this.$store.dispatch('app/setLanguage', lang)
+            this.$message({
+                message: 'Switch Language Success',
+                type: 'success'
+            })
+        }
     }
-  },
-  methods: {
-    handleSetLanguage(lang) {
-      this.$i18n.locale = lang
-      this.$store.dispatch('app/setLanguage', lang)
-      this.$message({
-        message: 'Switch Language Success',
-        type: 'success'
-      })
-    }
-  }
 }
 </script>

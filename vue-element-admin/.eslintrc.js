@@ -22,7 +22,7 @@ module.exports = {
       }
     }],
     "vue/singleline-html-element-content-newline": "off",
-    "vue/multiline-html-element-content-newline":"off",
+    "vue/multiline-html-element-content-newline": "off",
     "vue/name-property-casing": ["error", "PascalCase"],
     "vue/no-v-html": "off",
     'accessor-pairs': 2,
@@ -47,13 +47,16 @@ module.exports = {
     'curly': [2, 'multi-line'],
     'dot-location': [2, 'property'],
     'eol-last': 2,
-    'eqeqeq': ["error", "always", {"null": "ignore"}],
+    // 'eqeqeq': ["error", "always", {
+    //   "null": "ignore"
+    // }],
+    'eqeqeq': 'off',
     'generator-star-spacing': [2, {
       'before': true,
       'after': true
     }],
     'handle-callback-err': [2, '^(err|error)$'],
-    'indent': [2, 2, {
+    'indent': ['error', 4, {
       'SwitchCase': 1
     }],
     'jsx-quotes': [2, 'prefer-single'],
@@ -96,7 +99,8 @@ module.exports = {
     'no-implied-eval': 2,
     'no-inner-declarations': [2, 'functions'],
     'no-invalid-regexp': 2,
-    'no-irregular-whitespace': 2,
+    // 禁止空格报错检测
+    'no-irregular-whitespace': 'off',
     'no-iterator': 2,
     'no-label-var': 2,
     'no-labels': [2, {
@@ -104,7 +108,7 @@ module.exports = {
       'allowSwitch': false
     }],
     'no-lone-blocks': 2,
-    'no-mixed-spaces-and-tabs': 2,
+"no-mixed-spaces-and-tabs": [2, false],//禁止混用tab和空格
     'no-multi-spaces': 2,
     'no-multi-str': 2,
     'no-multiple-empty-lines': [2, {
@@ -142,10 +146,11 @@ module.exports = {
     }],
     'no-unreachable': 2,
     'no-unsafe-finally': 2,
-    'no-unused-vars': [2, {
-      'vars': 'all',
-      'args': 'none'
-    }],
+    // 'no-unused-vars': [2, {
+    //   'vars': 'all',
+    //   'args': 'none'
+    // }],
+    'no-unused-vars': 'off',
     'no-useless-call': 2,
     'no-useless-computed-key': 2,
     'no-useless-constructor': 2,
