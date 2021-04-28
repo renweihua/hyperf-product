@@ -30,4 +30,9 @@ class AdminMenu extends Model
                     ->get()
                     ->toArray();
     }
+
+    public static function getAllMenus()
+    {
+        return self::orderBy('menu_sort', 'ASC')->get();
+    }
 }

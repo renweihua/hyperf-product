@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AbstractController;
 use App\Exception\Exception;
+use App\Model\Rabc\AdminMenu;
 use App\Request\Admin\LoginRequest;
 use App\Service\Admin\LoginService;
 use Hyperf\Di\Annotation\Inject;
@@ -45,5 +46,9 @@ class Login extends AbstractController
         }else{
             return $this->error($this->loginService->getError());
         }
+    }
+
+    public function getRabcList(){
+        return $this->success(list_to_tree(AdminMenu::getAllMenus()->toArray()));
     }
 }
