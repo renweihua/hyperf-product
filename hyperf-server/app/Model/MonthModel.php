@@ -19,6 +19,23 @@ class MonthModel extends Model
         $this->setMonthTable();
     }
 
+    public function getMonth(): string
+    {
+        return $this->month;
+    }
+
+    /**
+     * 获取从开始分表到今天为止，所有的月份
+     *
+     * @return array
+     */
+    public function getAllMonthes() : array
+    {
+        $monthes = get_month_range(str_replace('_', '-', self::MIN_TABLE), date('Y-m'));
+        krsort($monthes);
+        return $monthes;
+    }
+
     /**
      * 设置按月分表
      *

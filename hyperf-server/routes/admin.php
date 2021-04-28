@@ -76,6 +76,9 @@ Router::addGroup(
                 Router::post('/logout', [Login::class, 'logout']);
             });
 
+            // 月份表列表
+            Router::get('/get_month_lists', [\App\Controller\Admin\Index::class, 'getMonthList']);
+
             // 文件上传
             Router::post('/upload_file', [\App\Controller\Admin\UploadFiles::class, 'file']);
             Router::post('/upload_files', [\App\Controller\Admin\UploadFiles::class, 'files']);
