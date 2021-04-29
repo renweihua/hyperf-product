@@ -81,6 +81,8 @@ Router::addGroup(
             Router::get('/logsStatistics', [\App\Controller\Admin\Index::class, 'logsStatistics']);
             // 版本的历史记录
             Router::get('/versionLogs', [\App\Controller\Admin\Index::class, 'versionLogs']);
+            // 获取服务器状态
+            Router::get('/getServerStatus', [\App\Controller\Admin\Index::class, 'getServerStatus']);
 
             // 月份表列表
             Router::get('/get_month_lists', [\App\Controller\Admin\Index::class, 'getMonthList']);

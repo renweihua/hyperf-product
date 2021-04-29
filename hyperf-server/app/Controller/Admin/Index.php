@@ -57,4 +57,14 @@ class Index extends BaseController
     {
         return $this->success($this->service->versionLogs());
     }
+
+    /**
+     * 获取服务器状态
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getServerStatus(): ResponseInterface
+    {
+        return $this->success($this->service->getServerStatus());
+    }
 }
