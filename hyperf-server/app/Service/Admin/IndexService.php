@@ -7,6 +7,7 @@ use App\Model\Log\AdminLog;
 use App\Model\Rabc\Admin;
 use App\Model\System\Banner;
 use App\Model\System\Friendlink;
+use App\Model\System\Version;
 use App\Service\Service;
 use Hyperf\Cache\Cache;
 
@@ -135,5 +136,18 @@ class IndexService extends Service
         }
         $cache->set('logs-statistics', $default_data);
         return $default_data;
+    }
+    /**
+     * 版本历史记录
+     *
+     * @return mixed
+     */
+    public function versionLogs()
+    {
+        return Version::select('version_name', 'version_number', 'version_content', 'publish_date')
+                      ->orderBy('version_sort', 'DESC')
+                      ->orderBy('publish_date', 'DESC')
+                      ->orderBy('version_id', 'ASC')
+                      ->get();
     }
 }

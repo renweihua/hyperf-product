@@ -79,6 +79,8 @@ Router::addGroup(
             Router::get('/indexs', [\App\Controller\Admin\Index::class, 'index']);
             // 按照日志类型的统计图数据
             Router::get('/logsStatistics', [\App\Controller\Admin\Index::class, 'logsStatistics']);
+            // 版本的历史记录
+            Router::get('/versionLogs', [\App\Controller\Admin\Index::class, 'versionLogs']);
 
             // 月份表列表
             Router::get('/get_month_lists', [\App\Controller\Admin\Index::class, 'getMonthList']);

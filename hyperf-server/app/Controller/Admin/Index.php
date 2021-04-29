@@ -47,4 +47,14 @@ class Index extends BaseController
     {
         return $this->success($this->service->logsStatistics());
     }
+
+    /**
+     * 版本的历史记录
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function versionLogs(): ResponseInterface
+    {
+        return $this->success($this->service->versionLogs());
+    }
 }
