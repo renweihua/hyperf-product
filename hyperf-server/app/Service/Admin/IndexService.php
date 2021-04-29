@@ -66,7 +66,7 @@ class IndexService extends Service
         $time_interval_key = "logs-statistics's-time-interval";
         $time_interval = $cache->get($time_interval_key, $default_time_interval);
         // 通过缓存进行读写
-        if ($data = $cache->has('logs-statistics')){
+        if ($data = $cache->get('logs-statistics')){
             return $data;
         }
         $default_data = [

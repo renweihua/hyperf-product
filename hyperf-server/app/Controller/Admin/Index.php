@@ -37,4 +37,14 @@ class Index extends BaseController
     {
         return $this->success(MonthModel::getInstance()->getAllMonthes());
     }
+
+    /**
+     * 按照日志类型的统计图数据
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function logsStatistics(): ResponseInterface
+    {
+        return $this->success($this->service->logsStatistics());
+    }
 }
