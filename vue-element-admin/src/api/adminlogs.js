@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getList(params) {
     return request({
-        url: 'adminlogs',
+        url: 'admin_logs',
         method: 'get',
         params
     })
@@ -10,7 +10,7 @@ export function getList(params) {
 
 export function setDel(data) {
     return request({
-        url: `/adminlogs/delete`,
+        url: `/admin_logs/delete`,
         method: 'delete',
         data
     })

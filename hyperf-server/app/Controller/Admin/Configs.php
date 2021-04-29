@@ -7,6 +7,7 @@ namespace App\Controller\Admin;
 use App\Model\System\Config;
 use App\Request\Admin\ConfigRequest;
 use Hyperf\Di\Annotation\Inject;
+use Psr\Http\Message\ResponseInterface;
 
 class Configs extends BaseController
 {
@@ -46,7 +47,7 @@ class Configs extends BaseController
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function pushRefreshConfig()
+    public function pushRefreshConfig(): ResponseInterface
     {
         $this->modelInstance->pushRefreshConfig();
         return $this->success([], '配置文件已同步成功！');

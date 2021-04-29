@@ -6,7 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Exception\Exception;
 use App\Model\Upload\UploadFile;
-use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class UploadFiles extends BaseController
 {
@@ -20,7 +20,7 @@ class UploadFiles extends BaseController
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function file(string $file_name = 'file', UploadFile $uploadFile): PsrResponseInterface
+    public function file(string $file_name = 'file', UploadFile $uploadFile): ResponseInterface
     {
         // 存在则返回一个 Hyperf\HttpMessage\Upload\UploadedFile 对象，不存在则返回 null
         $file = $this->request->file($file_name);
@@ -51,7 +51,7 @@ class UploadFiles extends BaseController
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function files(string $file_name = 'files', UploadFile $uploadFile): PsrResponseInterface
+    public function files(string $file_name = 'files', UploadFile $uploadFile): ResponseInterface
     {
         $files = $this->request->file($file_name);
         if (empty($files)) return $this->error('请上传文件！');

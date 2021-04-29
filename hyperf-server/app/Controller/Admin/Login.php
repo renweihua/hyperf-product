@@ -39,7 +39,7 @@ class Login extends AbstractController
         }
     }
 
-    public function me()
+    public function me(): ResponseInterface
     {
         if($res = $this->loginService->me($this->request->getAttribute('admin_id'))){
             return $this->success($res, $this->loginService->getError());
@@ -48,7 +48,8 @@ class Login extends AbstractController
         }
     }
 
-    public function getRabcList(){
+    public function getRabcList(): ResponseInterface
+    {
         return $this->success(list_to_tree(AdminMenu::getAllMenus()->toArray()));
     }
 }

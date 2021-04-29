@@ -75,6 +75,8 @@ Router::addGroup(
                 Router::post('/getRabcList', [Login::class, 'getRabcList']);
                 Router::post('/logout', [Login::class, 'logout']);
             });
+            // 首页统计
+            Router::get('/indexs', [\App\Controller\Admin\Index::class, 'index']);
 
             // 月份表列表
             Router::get('/get_month_lists', [\App\Controller\Admin\Index::class, 'getMonthList']);

@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AbstractController;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 use Hyperf\Di\Annotation\Inject;
-use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class BaseController extends AbstractController
 {
@@ -43,16 +41,14 @@ class BaseController extends AbstractController
     /**
      * 列表数据
      *
-     * @param  \Hyperf\HttpServer\Contract\RequestInterface  $request
-     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function index(RequestInterface $request): PsrResponseInterface
+    public function index(): ResponseInterface
     {
         $model = $this->modelInstance::query();
         // 设置where条件
         if ( method_exists($this, 'setSearchWhereFilter') ) {
-            $this->setSearchWhereFilter($model, $request->all());
+            $this->setSearchWhereFilter($model, $this->request->all());
         }
         $list = $this->modelInstance->getPaginate($model, $this->withModel, 10);
         return $this->success($list);
@@ -65,7 +61,7 @@ class BaseController extends AbstractController
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function detail($id): PsrResponseInterface
+    public function detail($id): ResponseInterface
     {
         $detail = $this->modelInstance->with($this->detailWithModel)->find($id);
         return empty($detail) ? $this->error('获取失败') : $this->success($detail);
@@ -74,13 +70,11 @@ class BaseController extends AbstractController
     /**
      * 新增
      *
-     * @param  \Hyperf\HttpServer\Contract\RequestInterface  $request
-     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function create(RequestInterface $request): PsrResponseInterface
+    public function create(): ResponseInterface
     {
-        $params = $request->all();
+        $params = $this->request->all();
         // 开启验证器
         if ( $this->validator ) {
             $validator = $this->validationFactory->make($params, $this->validator->getRules(__FUNCTION__), $this->validator->getMessages());
@@ -101,14 +95,12 @@ class BaseController extends AbstractController
     /**
      * 更新数据
      *
-     * @param  \Hyperf\HttpServer\Contract\RequestInterface  $request
-     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     // , $id
-    public function update(RequestInterface $request): PsrResponseInterface
+    public function update(): ResponseInterface
     {
-        $params = $request->all();
+        $params = $this->request->all();
         // 开启验证器
         if ( $this->validator ) {
             $validator = $this->validationFactory->make($params, $this->validator->getRules(__FUNCTION__), $this->validator->getMessages());
@@ -128,16 +120,14 @@ class BaseController extends AbstractController
     /**
      * 批量删除
      *
-     * @param  \Hyperf\HttpServer\Contract\RequestInterface  $request
-     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function delete(RequestInterface $request): PsrResponseInterface
+    public function delete(): ResponseInterface
     {
-        $params = $request->all();
+        $params = $this->request->all();
         // 开启验证器
         if ( $this->validator ) {
-            $validator = $this->validationFactory->make($request->all(), $this->validator->getRules(__FUNCTION__), $this->validator->getMessages());
+            $validator = $this->validationFactory->make($params, $this->validator->getRules(__FUNCTION__), $this->validator->getMessages());
             if ( $validator->fails() ) {
                 // Handle exception
                 $errorMessage = $validator->errors()->first();
@@ -154,16 +144,14 @@ class BaseController extends AbstractController
     /**
      * 设置指定字段【常用于状态的变动】
      *
-     * @param  \Hyperf\HttpServer\Contract\RequestInterface  $request
-     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function changeFiledStatus(RequestInterface $request): PsrResponseInterface
+    public function changeFiledStatus(): ResponseInterface
     {
-        $params = $request->all();
+        $params = $this->request->all();
         // 开启验证器
         if ( $this->validator ) {
-            $validator = $this->validationFactory->make($request->all(), $this->validator->getRules(__FUNCTION__), $this->validator->getMessages());
+            $validator = $this->validationFactory->make($params, $this->validator->getRules(__FUNCTION__), $this->validator->getMessages());
             if ( $validator->fails() ) {
                 // Handle exception
                 $errorMessage = $validator->errors()->first();
@@ -183,7 +171,7 @@ class BaseController extends AbstractController
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getSelectLists()
+    public function getSelectLists(): ResponseInterface
     {
         $lists = $this->modelInstance->getSelectLists();
         return $this->success($lists);
