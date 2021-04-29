@@ -130,7 +130,7 @@ abstract class Model extends BaseModel
      *
      * @return \Hyperf\Database\Model\Builder[]|\Hyperf\Database\Model\Collection
      */
-    public function getSelectLists($sort = 'DESC')
+    public function getSelectLists($sort = 'ASC')
     {
         $model = $this->query();
         // 是否开启了假删除

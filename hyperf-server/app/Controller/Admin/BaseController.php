@@ -177,4 +177,15 @@ class BaseController extends AbstractController
             return $this->error($this->modelInstance->getError());
         }
     }
+
+    /**
+     * 下拉筛选列表（可搜索）
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getSelectLists()
+    {
+        $lists = $this->modelInstance->getSelectLists();
+        return $this->success($lists);
+    }
 }
