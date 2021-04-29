@@ -177,7 +177,7 @@ class IndexService extends Service
 
         $memory_info = $systemInfo->getMemory();
         $memory = [
-            'chart_legend' => ['used', 'free'],
+            'chart_legend' => ['used', 'free', 'buffer_cache'],
             'chart_series' => [
                 [
                     'name' => 'used',
