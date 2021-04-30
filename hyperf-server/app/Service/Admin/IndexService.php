@@ -187,6 +187,10 @@ class IndexService extends Service
                     'name' => 'free',
                     'value' => $memory_info['free'],
                 ],
+                [
+                    'name' => 'buffer_cache',
+                    'value' => $memory_info['buffer_cache'],
+                ],
             ],
         ];
 
