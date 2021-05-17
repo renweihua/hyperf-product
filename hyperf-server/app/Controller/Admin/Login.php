@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AbstractController;
 use App\Exception\Exception;
+use App\Model\Rabc\Admin;
 use App\Model\Rabc\AdminMenu;
 use App\Request\Admin\LoginRequest;
 use App\Service\Admin\LoginService;
@@ -48,8 +49,21 @@ class Login extends AbstractController
         }
     }
 
+    /**
+     * 获取登录会员的权限列表
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     public function getRabcList(): ResponseInterface
     {
-        return $this->success(list_to_tree(AdminMenu::getAllMenus()->toArray()));
+        $admin_id = $this->request->getAttribute('admin_id');
+        $admin = Admin::find($admin_id, ['roles.menus'])->toArray();
+
+        $menus = [];
+        foreach (array_column($admin['roles'], 'menus') as $item){
+            $menus = array_merge($menus, $item);
+        }
+
+        return $this->success(list_to_tree($menus));
     }
 }
