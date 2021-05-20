@@ -32,7 +32,7 @@ class LoginService extends Service
      *
      * @return mixed
      */
-    public function login(string $username, string $password)
+    public function login($request, string $username, string $password)
     {
         $admin = $this->admin->getUserByName($username);
         if ( !$admin ) throw new Exception('管理员账户不存在');
@@ -48,7 +48,7 @@ class LoginService extends Service
 
         // 事件需要通过 事件调度器(EventDispatcher) 调度才能让 监听器(Listener) 监听到
         // 这里 dispatch(object $event) 会逐个运行监听该事件的监听器
-        $this->eventDispatcher->dispatch(new AdminLoginEvent($admin));
+        $this->eventDispatcher->dispatch(new AdminLoginEvent($request, $admin));
 
         $data = $this->getTokenFormat($admin);
         $token = Rsa::publicEncrypt($data);

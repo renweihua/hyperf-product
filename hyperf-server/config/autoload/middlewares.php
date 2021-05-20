@@ -13,5 +13,7 @@ return [
     'http' => [
         // 数组内配置您的全局中间件，顺序根据该数组的顺序
         App\Middleware\CorsMiddleware::class,
+        // 表单验证的中间件
+        \Hyperf\Validation\Middleware\ValidationMiddleware::class,
     ],
 ];

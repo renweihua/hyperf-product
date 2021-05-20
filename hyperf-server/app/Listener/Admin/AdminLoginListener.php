@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Listener\Admin;
 
 use App\Event\Admin\AdminLoginEvent;
+use App\Model\Log\AdminLoginLog;
 use Hyperf\Event\Annotation\Listener;
 use Psr\Container\ContainerInterface;
 use Hyperf\Event\Contract\ListenerInterface;
@@ -42,8 +43,9 @@ class AdminLoginListener implements ListenerInterface
         // 直接访问 $event 的 admin 属性获得事件触发时传递的参数值
         // $event->admin;
 
-        var_dump('AdminLoginListener - process');
+        // var_dump('AdminLoginListener - process');
 
-        var_dump($event->admin);
+        // 登录日志
+        AdminLoginLog::getInstance()->record($event->request, $event->admin->admin_id ?? 0);
     }
 }

@@ -32,9 +32,9 @@ class Login extends AbstractController
         $data = $request->validated();
 
         try {
-            $data = $this->loginService->login($data['admin_name'], $data['password']);
+            $result = $this->loginService->login($this->request, $data['admin_name'], $data['password']);
 
-            return $this->success($data);
+            return $this->success($result);
         } catch (Exception $e) {
             return $this->error($e->getMessage());
         }

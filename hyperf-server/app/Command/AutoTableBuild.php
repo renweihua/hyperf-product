@@ -64,7 +64,7 @@ class AutoTableBuild extends HyperfCommand
         $this->logger->info('auto_table_build - 自动按月分表 - start');
 
         foreach ($this->tabel_list as $table) {
-            var_dump((new $table)->createMonthTable('', strtotime('+1 month')));
+            (new $table)->createMonthTable('', strtotime('+1 month'));
         }
 
         $this->logger->info('auto_table_build - 自动按月分表 - end');
