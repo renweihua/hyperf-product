@@ -43,10 +43,10 @@ class TokenAuthMiddleware implements MiddlewareInterface
             return $this->error('Token已失效！', $un_login_status);
         }
         // 检测Token是否为管理员登录的Token
-        if ( $admin->guard != 'admin' ) {
+        if (!isset($admin->guard) || $admin->guard != 'admin' ) {
             return $this->error('无效的Token！', $un_login_status);
         }
-        if ($admin->expire_time < time()){
+        if (!isset($admin->expire_time) || $admin->expire_time < time()){
             return $this->error('Token已过期！', $un_login_status);
         }
 

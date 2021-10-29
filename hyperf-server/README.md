@@ -1,3 +1,46 @@
+#### 使用说明
+
+###### 启动服务，且热更新
+* 命令行：`php bin/hyperf.php server:watch`
+* www角色执行命令：`su -c "php bin/hyperf.php serve:watch" -s /bin/sh www`
+* 后置进程：`nohup php 文件 2>&1 &`
+* 使用`supervisor`守护进程启动服务即可
+
+
+## docker运行项目
+
+### docker-compose up -d nginx mysql phpmyadmin redis workspace
+
+### build 服务名
+    docker build 命令用于使用 Dockerfile 创建镜像。
+
+* `docker-compose build server-name`
+
+### 运行hyperf
+
+* `docker run --name hyperf -v D:\phpEnv\www\cnpscy\hyperf-product\hyperf-server:/var/www/hyperf-project  -p 9501:9501 -it  --privileged -u root  --entrypoint /bin/sh hyperf/hyperf:7.4-alpine-v3.11-swoole`
+
+
+### 进入容器
+
+##### docker attach命令进入该容器
+- docker run -itd ubuntu:14.04 /bin/bash
+- docker attach 容器Id
+
+##### docker exec进入Docker容器
+docker exec -it 容器Id /bin/bash
+
+
+### 创建bridge网络
+
+* `docker network create -d bridge --subnet 192.168.249.0/24 --gateway 192.168.249.1 localNet`
+
+
+
+- - -
+
+
+
 # Introduction
 
 This is a skeleton application using the Hyperf framework. This application is meant to be used as a starting place for those looking to get their feet wet with Hyperf Framework.

@@ -45,7 +45,7 @@ class VisitApiTokenMiddleware implements MiddlewareInterface
             throw new Exception('无权访问[02]！');
         }
         // 检测Token的过期时间
-        if ($data['expire_time'] < time()){
+        if (!isset($data['expire_time']) || $data['expire_time'] < time()){
             throw new Exception('访问无权已失效[02]！');
         }
 
@@ -55,7 +55,7 @@ class VisitApiTokenMiddleware implements MiddlewareInterface
             throw new Exception('请设置AppKey！');
         }
         // 验证app_key是否匹配
-        if ($params['app_key'] != $data['app_key']){
+        if (!isset($data['app_key']) || $params['app_key'] != $data['app_key']){
             throw new Exception('无效AppKey！');
         }
 
