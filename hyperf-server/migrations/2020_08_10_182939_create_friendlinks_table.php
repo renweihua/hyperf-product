@@ -12,7 +12,7 @@ class CreateFriendlinksTable extends Migration
     public function up(): void
     {
         if (Schema::hasTable('friendlinks')) return;
-        Schema::create('friendlinks ', function (Blueprint $table) {
+        Schema::create('friendlinks', function (Blueprint $table) {
             // 指定表存储引擎
             $table->engine = 'InnoDB';
             $table->bigIncrements('link_id')->comment('友情链接表');
