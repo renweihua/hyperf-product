@@ -32,7 +32,6 @@ class CreateUserLogs extends Migration
             $table->json('extend_json')->nullable()->comment('扩展信息');
             // 索引
             $table->index('user_id');
-            $table->index('is_public');
             $table->index('is_delete');
         });
     }
