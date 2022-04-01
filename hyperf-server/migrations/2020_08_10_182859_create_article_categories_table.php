@@ -18,7 +18,7 @@ class CreateArticleCategoriesTable extends Migration
             $table->bigIncrements('category_id')->comment('文章分类表');
             $table->integer('parent_id')->unsigned()->default(0)->comment('父级Id');
             $table->string('category_name', 200)->default('')->comment('名称');
-            $table->integer('category_cover')->unsigned()->default(0)->comment('封面');
+            $table->string('category_cover', 200)->default('')->comment('封面');
             $table->string('category_description', 200)->default('')->comment('描述');
             $table->integer('category_sort')->unsigned()->default(0)->comment('排序');
             $table->boolean('is_delete')->unsigned()->default(0)->comment('是否删除：1：删除；0：正常');
