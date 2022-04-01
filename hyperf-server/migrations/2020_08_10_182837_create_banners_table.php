@@ -17,7 +17,7 @@ class CreateBannersTable extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('banner_id')->comment('Banner表');
             $table->string('banner_name', 100)->default('')->comment('标题');
-            $table->string('banner_cover', 200)->unsigned()->default(0)->comment('封面');
+            $table->string('banner_cover', 200)->default('')->comment('封面');
             $table->string('banner_link', 200)->default('')->comment('外链');
             $table->string('banner_words', 200)->default('')->comment('文字描述');
             $table->smallInteger('banner_sort')->unsigned()->default(0)->comment('排序【升序】');
