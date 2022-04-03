@@ -25,7 +25,9 @@ Router::addGroup('',
     [
         'middleware' => [
             // 跨域中间件
-            App\Middleware\CorsMiddleware::class,
+            App\Middleware\CorsMiddleware::class, 
+            // 浏览记录中间件
+            App\Middleware\Api\VisitRecordMiddleware::class,
             // API访问的Token验证中间件
             \App\Middleware\Api\VisitApiTokenMiddleware::class,
             // API接口规范的中间件

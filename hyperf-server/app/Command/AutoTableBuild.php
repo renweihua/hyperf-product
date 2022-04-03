@@ -6,6 +6,7 @@ namespace App\Command;
 
 use App\Model\Log\AdminLog;
 use App\Model\Log\AdminLoginLog;
+use App\Model\Log\VisitRecord;
 use Hyperf\Command\Command as HyperfCommand;
 use Hyperf\Command\Annotation\Command;
 use Psr\Container\ContainerInterface;
@@ -41,6 +42,7 @@ class AutoTableBuild extends HyperfCommand
     private $tabel_list = [
         AdminLog::class,
         AdminLoginLog::class,
+        VisitRecord::class,
     ];
 
     public function __construct(ContainerInterface $container)
@@ -64,7 +66,9 @@ class AutoTableBuild extends HyperfCommand
         $this->logger->info('auto_table_build - 自动按月分表 - start');
 
         foreach ($this->tabel_list as $table) {
-            (new $table)->createMonthTable('', strtotime('+1 month'));
+            $modelInstance = (new $table);
+            $modelInstance->createMonthTable();
+            $modelInstance->createMonthTable('', strtotime('+1 month'));
         }
 
         $this->logger->info('auto_table_build - 自动按月分表 - end');
